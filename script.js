@@ -1,17 +1,19 @@
-function mincost(arr)
-{ 
-//write your code here
-	let cost=0;
-	let sum=0;
-	arr.sort();
-	arr.forEach((e)=>{
-		sum+=e;
-		cost+=sum;
-	})
-// return the min cost
-	return cost-2;
-	
-  
+function mincost(arr) {
+    let totalCost = 0;
+    let heap = [...arr];
+    heap.sort((a, b) => a - b);
+
+    while (heap.length > 1) {
+        
+        let first = heap.shift();
+        let second = heap.shift();
+        let cost = first + second;
+        totalCost += cost;
+        heap.push(cost);
+        heap.sort((a, b) => a - b);
+    }
+
+    return totalCost;
 }
 
-module.exports=mincost;
+module.exports = mincost;
